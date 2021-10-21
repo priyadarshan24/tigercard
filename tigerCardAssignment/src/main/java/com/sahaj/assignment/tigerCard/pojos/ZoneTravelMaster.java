@@ -2,8 +2,7 @@ package com.sahaj.assignment.tigerCard.pojos;
 
 public class ZoneTravelMaster {
 	
-	private String fromZone;
-	private String toZone;
+	private FromZoneToZone fromZoneToZone;
 	
 	private double peakHourFare;
 	private double offPeakHourFare;
@@ -12,12 +11,31 @@ public class ZoneTravelMaster {
 	private double dailyCapFare;
 	private double weeklyCapFare;
 	
-	
-	
+
+
+	public double getPeakHourFare() {
+		return peakHourFare;
+	}
+
+
+	public double getOffPeakHourFare() {
+		return offPeakHourFare;
+	}
+
+
+	public double getDailyCapFare() {
+		return dailyCapFare;
+	}
+
+
+	public double getWeeklyCapFare() {
+		return weeklyCapFare;
+	}
+
+
 	private ZoneTravelMaster(ZoneTravelMasterBuilder builder)
 	{
-		builder.fromZone = this.fromZone;
-		builder.toZone = this.toZone;
+		builder.fromZoneToZone = this.fromZoneToZone;
 		builder.peakHourFare = this.peakHourFare;
 		builder.offPeakHourFare = this.offPeakHourFare;
 		builder.dailyCapFare = this.dailyCapFare;
@@ -28,8 +46,7 @@ public class ZoneTravelMaster {
 	public static class ZoneTravelMasterBuilder {
 		
 		
-		private String fromZone;
-		private String toZone;
+		private FromZoneToZone fromZoneToZone;
 		
 		private double peakHourFare;
 		private double offPeakHourFare;
@@ -40,17 +57,12 @@ public class ZoneTravelMaster {
 		
 		
 		
-		public ZoneTravelMasterBuilder fromZone(String fromZone)
+		public ZoneTravelMasterBuilder fromZone(FromZoneToZone fromZoneToZone)
 		{
-			this.fromZone = fromZone;
+			this.fromZoneToZone = fromZoneToZone;
 			return this;
 		}
-		
-		public ZoneTravelMasterBuilder toZone(String toZone)
-		{
-			this.toZone = fromZone;
-			return this;
-		}
+
 		
 		public ZoneTravelMasterBuilder peakHourFare(double peakHourFare)
 		{
