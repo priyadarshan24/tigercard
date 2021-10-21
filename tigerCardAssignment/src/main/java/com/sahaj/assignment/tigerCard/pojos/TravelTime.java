@@ -2,6 +2,11 @@ package com.sahaj.assignment.tigerCard.pojos;
 
 import java.time.DayOfWeek;
 
+/**
+ * Performs Travel Time related operations on Travel Time Data
+ * @author pd
+ *
+ */
 public class TravelTime {
 	
 	public static final int WEEKDAY_MORNING_PEAKHOUR_START_TIME_IN_SECS = 0;
