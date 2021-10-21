@@ -1,8 +1,11 @@
-package com.sahaj.assignment.tigerCard.pojos;
+package com.sahaj.assignment.tigerCard.visitables;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import com.sahaj.assignment.tigerCard.pojos.FromZoneToZone;
+import com.sahaj.assignment.tigerCard.visitors.IVisitor;
 
 public class DayJourneyNode implements IJourneyNode{
 	
@@ -70,6 +73,11 @@ public class DayJourneyNode implements IJourneyNode{
 		}
 		
 		
+		
+	}
+
+	public void accept(IVisitor visitor) {
+		// TODO Auto-generated method stub
 		
 	}
 	

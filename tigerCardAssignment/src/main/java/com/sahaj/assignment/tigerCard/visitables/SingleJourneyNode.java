@@ -1,4 +1,8 @@
-package com.sahaj.assignment.tigerCard.pojos;
+package com.sahaj.assignment.tigerCard.visitables;
+
+import com.sahaj.assignment.tigerCard.pojos.FromZoneToZone;
+import com.sahaj.assignment.tigerCard.pojos.TravelTime;
+import com.sahaj.assignment.tigerCard.visitors.IVisitor;
 
 public class SingleJourneyNode implements IJourneyNode{
 	
@@ -63,6 +67,13 @@ public class SingleJourneyNode implements IJourneyNode{
 		}
 		
 		
+		
+	}
+
+
+
+	public void accept(IVisitor visitor) {
+		// TODO Auto-generated method stub
 		
 	}
 	
