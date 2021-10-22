@@ -27,10 +27,6 @@ public class SingleJourneyNode implements IJourneyNode{
 	}
 	
 	
-	private void isPeakHourTravel()
-	{
-		//if(trave)
-	}
 	
 	
 	public static class SingleJourneyNodeBuilder 
