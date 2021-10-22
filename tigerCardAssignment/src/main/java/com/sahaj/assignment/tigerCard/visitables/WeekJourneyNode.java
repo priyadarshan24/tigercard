@@ -43,6 +43,29 @@ public class WeekJourneyNode implements IJourneyNode
 		return Collections.unmodifiableList(dayJourneys);
 	}
 	
+	
+	public ZoneTravelMaster getFarthestTravelZoneDuringWeek()
+	{
+		
+		ZoneTravelMaster farthestTravelZoneDuringWeek = null;
+		
+		for( DayJourneyNode dayJourneyNode : this.getDayJourneys() )
+		{
+			ZoneTravelMaster iteratedDayFarthestTravelZone = dayJourneyNode.getFarthestTravelZone();
+			if( farthestTravelZoneDuringWeek == null ||
+					iteratedDayFarthestTravelZone.getWeeklyCapFare() > farthestTravelZoneDuringWeek.getWeeklyCapFare() )
+			{
+				farthestTravelZoneDuringWeek = iteratedDayFarthestTravelZone;
+			}
+			
+			
+		}
+		
+		return farthestTravelZoneDuringWeek;
+		
+	}
+	
+	
 	public static class WeekJourneyNodeBuilder 
 	{
 		private FromZoneToZone fromZoneToZone;

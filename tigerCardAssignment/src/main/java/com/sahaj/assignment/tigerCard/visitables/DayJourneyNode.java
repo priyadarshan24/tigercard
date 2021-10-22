@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.sahaj.assignment.tigerCard.pojos.FromZoneToZone;
 import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMaster;
 import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMasterManager;
 import com.sahaj.assignment.tigerCard.visitors.IVisitor;
 
 public class DayJourneyNode implements IJourneyNode{
 	
-	private FromZoneToZone fromZoneToZone;
 	private String day;
 	private String explanation;
 	
@@ -20,7 +18,6 @@ public class DayJourneyNode implements IJourneyNode{
 	
 	public DayJourneyNode(DayJourneyNodeBuilder dayJourneyNodeBuilder)
 	{
-		this.fromZoneToZone = dayJourneyNodeBuilder.fromZoneToZone;
 		this.day = dayJourneyNodeBuilder.day;
 		this.explanation = dayJourneyNodeBuilder.explanation;
 	}
@@ -42,10 +39,12 @@ public class DayJourneyNode implements IJourneyNode{
 		return Collections.unmodifiableList(singleJourneys);
 	}
 	
-	public double getFarthestJourneyDailyFareCap()
+	public ZoneTravelMaster getFarthestTravelZone()
 	{
 
 		double dailyDareCapForFarthestJourney = 0;
+		ZoneTravelMaster farthestTravelZone = null;
+		
 		ZoneTravelMaster travelMaster;
 		
 		for( SingleJourneyNode singleJourneyNode : this.getSingleJourneys() )
@@ -53,26 +52,21 @@ public class DayJourneyNode implements IJourneyNode{
 			
 			travelMaster = ZoneTravelMasterManager.INSTANCE.getZoneMasterDataForFromZoneToZone(singleJourneyNode.getFromZoneToZone());
 			
-			dailyDareCapForFarthestJourney = dailyDareCapForFarthestJourney < travelMaster.getDailyCapFare() ? travelMaster.getDailyCapFare() : dailyDareCapForFarthestJourney;
+			if( dailyDareCapForFarthestJourney < travelMaster.getDailyCapFare() )
+			{
+				farthestTravelZone = travelMaster;
+			}
 			
 		}
 		
-		return dailyDareCapForFarthestJourney;
+		return farthestTravelZone;
 		
 	}
 	
 	public static class DayJourneyNodeBuilder 
 	{
-		private FromZoneToZone fromZoneToZone;
 		private String day;
 		private String explanation;
-		
-		
-		public DayJourneyNodeBuilder fromZoneToZone(FromZoneToZone fromZoneToZone) 
-		{
-			this.fromZoneToZone = fromZoneToZone;
-			return this;
-		}
 		
 		
 		public DayJourneyNodeBuilder day(String day) 

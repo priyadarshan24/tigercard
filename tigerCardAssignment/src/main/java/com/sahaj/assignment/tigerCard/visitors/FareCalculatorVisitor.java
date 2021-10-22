@@ -1,20 +1,17 @@
 package com.sahaj.assignment.tigerCard.visitors;
 
 import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMaster;
-import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMasterManager;
 import com.sahaj.assignment.tigerCard.visitables.DayJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.OverallJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.SingleJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.WeekJourneyNode;
 
 public class FareCalculatorVisitor implements IVisitor{
-	
-	private ZoneTravelMasterManager zoneTravelMasterManager = ZoneTravelMasterManager.INSTANCE;
 
 	public double visit(DayJourneyNode dayJourneyNode) {
 		
 		double dayJourneyFare = 0;
-		double dailyFareCapForFarthestJourney = 0;
+		ZoneTravelMaster farthestTravelZone = null;
 		
 		for( SingleJourneyNode singleJourneyNode : dayJourneyNode.getSingleJourneys() )
 		{
@@ -23,9 +20,9 @@ public class FareCalculatorVisitor implements IVisitor{
 			
 		}
 		
-		dailyFareCapForFarthestJourney = dayJourneyNode.getFarthestJourneyDailyFareCap();
+		farthestTravelZone = dayJourneyNode.getFarthestTravelZone();
 		
-		dayJourneyFare = dayJourneyFare > dailyFareCapForFarthestJourney ? dailyFareCapForFarthestJourney : dayJourneyFare;
+		dayJourneyFare = dayJourneyFare > farthestTravelZone.getDailyCapFare() ? farthestTravelZone.getDailyCapFare() : dayJourneyFare;
 		
 		return dayJourneyFare;
 	}
@@ -39,19 +36,25 @@ public class FareCalculatorVisitor implements IVisitor{
 			
 			weeklyJourneyFare += dayJourneyNode.accept(this);
 			
-			//travelMaster = zoneTravelMasterManager.getZoneMasterDataForFromZoneToZone(singleJourneyNode.getFromZoneToZone());
-			
-			//dailyCapForFarthestFare = dailyCapForFarthestFare < travelMaster.getDailyCapFare() ? travelMaster.getDailyCapFare() : dayJourneyFare;
-			
 		}
 		
-		return 0;
+		double weeklyCappedFareForFarthestZoneTravelled = weekJourneyNode.getFarthestTravelZoneDuringWeek().getWeeklyCapFare();
+		
+		weeklyJourneyFare = weeklyJourneyFare > weeklyCappedFareForFarthestZoneTravelled ? weeklyCappedFareForFarthestZoneTravelled : weeklyJourneyFare;
+		
+		return weeklyJourneyFare;
 		
 	}
 
 	public double visit(OverallJourneyNode overallJourneyNode) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		double totalJourneyFare = 0;
+		
+		for( WeekJourneyNode weekJourneyNode : overallJourneyNode.getWeekJourneys() )
+		{
+			totalJourneyFare += weekJourneyNode.accept(this);
+		}
+		return totalJourneyFare;
 	}
 
 }

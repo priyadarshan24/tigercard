@@ -18,20 +18,20 @@ public class OverallJourneyNode implements IJourneyNode
 	}
 	
 	
-	public void addSingleJourneyNode(WeekJourneyNode weekJourneyNode)
+	public void addWeekJourneyNode(WeekJourneyNode weekJourneyNode)
 	{
 		this.weekJourneys.add(weekJourneyNode);
 	}
 	
-	public List<WeekJourneyNode> getSingleJourneys()
+	public List<WeekJourneyNode> getWeekJourneys()
 	{
 		return Collections.unmodifiableList(weekJourneys);
 	}
 
 
 	public double accept(IVisitor visitor) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return visitor.visit(this);
 	}
 
 }
