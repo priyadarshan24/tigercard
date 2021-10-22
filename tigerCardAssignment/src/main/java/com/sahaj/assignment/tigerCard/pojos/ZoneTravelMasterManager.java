@@ -4,8 +4,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ZoneTravelMasterManager {
+public enum ZoneTravelMasterManager 
+{
 	
+	INSTANCE;
 	
 	private Map<FromZoneToZone, ZoneTravelMaster> zoneTravelMasterData = new HashMap<FromZoneToZone, ZoneTravelMaster>();
 	
@@ -22,14 +24,14 @@ public class ZoneTravelMasterManager {
 	}
 	
 	
-	public void getZoneMasterDataForFromZoneToZone(FromZoneToZone key)
+	public ZoneTravelMaster getZoneMasterDataForFromZoneToZone(FromZoneToZone key)
 	{
 		if(key == null)
 		{
 			throw new IllegalArgumentException("Zone Key cannot be null");
 		}
 		
-		zoneTravelMasterData.get(key);
+		return zoneTravelMasterData.get(key);
 	}
 	
 	

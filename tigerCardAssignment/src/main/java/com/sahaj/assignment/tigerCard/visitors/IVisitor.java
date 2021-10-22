@@ -7,10 +7,10 @@ import com.sahaj.assignment.tigerCard.visitables.WeekJourneyNode;
 public interface IVisitor {
 	
 	
-	public void visit(DayJourneyNode dayJourneyNode);
+	public double visit(DayJourneyNode dayJourneyNode);
 	
-	public void visit(WeekJourneyNode weekJourneyNode);
+	public double visit(WeekJourneyNode weekJourneyNode);
 	
-	public void visit(OverallJourneyNode overallJourneyNode);
+	public double visit(OverallJourneyNode overallJourneyNode);
 
 }

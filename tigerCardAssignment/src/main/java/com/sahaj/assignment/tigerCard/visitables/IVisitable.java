@@ -4,6 +4,6 @@ import com.sahaj.assignment.tigerCard.visitors.IVisitor;
 
 public interface IVisitable {
 	
-	public void accept(IVisitor visitor);
+	public double accept(IVisitor visitor);
 
 }

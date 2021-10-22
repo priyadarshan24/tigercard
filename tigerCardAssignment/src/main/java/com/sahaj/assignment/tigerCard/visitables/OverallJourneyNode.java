@@ -29,9 +29,9 @@ public class OverallJourneyNode implements IJourneyNode
 	}
 
 
-	public void accept(IVisitor visitor) {
+	public double accept(IVisitor visitor) {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
 }

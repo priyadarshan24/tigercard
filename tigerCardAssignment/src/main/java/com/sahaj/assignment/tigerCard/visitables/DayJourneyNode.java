@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.sahaj.assignment.tigerCard.pojos.FromZoneToZone;
+import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMaster;
+import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMasterManager;
 import com.sahaj.assignment.tigerCard.visitors.IVisitor;
 
 public class DayJourneyNode implements IJourneyNode{
@@ -38,6 +40,25 @@ public class DayJourneyNode implements IJourneyNode{
 	public List<SingleJourneyNode> getSingleJourneys()
 	{
 		return Collections.unmodifiableList(singleJourneys);
+	}
+	
+	public double getFarthestJourneyDailyFareCap()
+	{
+
+		double dailyDareCapForFarthestJourney = 0;
+		ZoneTravelMaster travelMaster;
+		
+		for( SingleJourneyNode singleJourneyNode : this.getSingleJourneys() )
+		{
+			
+			travelMaster = ZoneTravelMasterManager.INSTANCE.getZoneMasterDataForFromZoneToZone(singleJourneyNode.getFromZoneToZone());
+			
+			dailyDareCapForFarthestJourney = dailyDareCapForFarthestJourney < travelMaster.getDailyCapFare() ? travelMaster.getDailyCapFare() : dailyDareCapForFarthestJourney;
+			
+		}
+		
+		return dailyDareCapForFarthestJourney;
+		
 	}
 	
 	public static class DayJourneyNodeBuilder 
@@ -76,8 +97,9 @@ public class DayJourneyNode implements IJourneyNode{
 		
 	}
 
-	public void accept(IVisitor visitor) {
-		// TODO Auto-generated method stub
+	public double accept(IVisitor visitor) {
+		
+		return 0;
 		
 	}
 	

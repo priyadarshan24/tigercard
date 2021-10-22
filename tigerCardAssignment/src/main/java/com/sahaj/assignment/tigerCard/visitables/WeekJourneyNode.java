@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.sahaj.assignment.tigerCard.pojos.FromZoneToZone;
+import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMaster;
+import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMasterManager;
 import com.sahaj.assignment.tigerCard.visitors.IVisitor;
 
 public class WeekJourneyNode implements IJourneyNode
@@ -31,12 +33,12 @@ public class WeekJourneyNode implements IJourneyNode
 	}
 	
 	
-	public void addSingleJourneyNode(DayJourneyNode dayJourneyNode)
+	public void addDayJourneyNode(DayJourneyNode dayJourneyNode)
 	{
 		this.dayJourneys.add(dayJourneyNode);
 	}
 	
-	public List<DayJourneyNode> getSingleJourneys()
+	public List<DayJourneyNode> getDayJourneys()
 	{
 		return Collections.unmodifiableList(dayJourneys);
 	}
@@ -77,8 +79,9 @@ public class WeekJourneyNode implements IJourneyNode
 		
 	}
 
-	public void accept(IVisitor visitor) {
-		// TODO Auto-generated method stub
+	public double accept(IVisitor visitor) {
+		
+		return visitor.visit(this);
 		
 	}
 	
