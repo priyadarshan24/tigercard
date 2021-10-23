@@ -5,7 +5,7 @@ public enum TigerCardUtil {
 	
 	INSTANCE;
 	
-	private static final String SPLIT_TOKEN = "-";
+	private static final String SPLIT_TOKEN = ":";
 	
 	public long getTimeinSeconds(String inputTime)
 	{
@@ -19,6 +19,11 @@ public enum TigerCardUtil {
 		
 		
 			String[] splitTime = inputTime.split(SPLIT_TOKEN);
+			
+			if( splitTime == null || splitTime.length <= 0)
+			{
+				throw new IllegalArgumentException("Input time format is not supported");
+			}
 			
 			
 			

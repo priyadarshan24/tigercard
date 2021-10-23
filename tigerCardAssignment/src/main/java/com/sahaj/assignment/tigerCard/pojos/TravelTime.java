@@ -14,6 +14,12 @@ public class TravelTime {
 	private String time;
 	private String day;
 	
+	public TravelTime(String day, String time)
+	{
+		this.day = day;
+		this.time = time;
+	}
+	
 	
 	public boolean isPeakHourTravelTime()
 	{
@@ -77,6 +83,14 @@ public class TravelTime {
 	{
 		return inputTime >= startTime && inputTime <= endTime ? true : false;
 	}
+
+
+	@Override
+	public String toString() {
+		
+		return this.day + "-" + this.time;
+	}
+	
 	
 
 }
