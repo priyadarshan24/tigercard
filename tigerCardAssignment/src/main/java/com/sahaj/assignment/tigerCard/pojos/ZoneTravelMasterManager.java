@@ -17,7 +17,7 @@ public enum ZoneTravelMasterManager
 	{
 		if(key == null || value == null)
 		{
-			throw new IllegalArgumentException("ZOne Key and Zone Data Value cannot be null");
+			throw new IllegalArgumentException("Zone Key and Zone Data Value cannot be null");
 		}
 		
 		zoneTravelMasterData.put(key, value);
