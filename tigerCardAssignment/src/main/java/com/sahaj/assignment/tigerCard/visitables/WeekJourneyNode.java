@@ -12,6 +12,8 @@ public class WeekJourneyNode implements IJourneyNode
 	
 	private String explanation;
 	
+	private double calculatedFare = 0;
+	
 	private List<DayJourneyNode> dayJourneys = new ArrayList<DayJourneyNode>();
 	
 	
@@ -52,9 +54,22 @@ public class WeekJourneyNode implements IJourneyNode
 
 	public double accept(IVisitor visitor) {
 		
-		return visitor.visit(this);
+		calculatedFare = visitor.visit(this);
+		System.out.println("Week Journey Calculation:" + this.toString());
+		return calculatedFare;
 		
 	}
 	
+	
+	@Override
+	public String toString() {
+		StringBuilder weekJourneyNodeBuilder = new StringBuilder();
+		weekJourneyNodeBuilder.append(this.calculatedFare);
+		weekJourneyNodeBuilder.append("|");
+		weekJourneyNodeBuilder.append(this.explanation);
+		
+		
+		return weekJourneyNodeBuilder.toString();
+	}
 
 }

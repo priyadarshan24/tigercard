@@ -12,6 +12,7 @@ import com.sahaj.assignment.tigerCard.pojos.TravelTime;
 import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMaster;
 import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMasterManager;
 import com.sahaj.assignment.tigerCard.visitables.DayJourneyNode;
+import com.sahaj.assignment.tigerCard.visitables.OverallJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.SingleJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.WeekJourneyNode;
 
@@ -77,6 +78,8 @@ public class FareCalculatorVisitorTest {
 	@Test
 	public void testVisitDayJourneyNodeDailyCapReached() 
 	{
+		System.out.println("Entering function testVisitDayJourneyNodeDailyCapReached############################");
+		
 		DayJourneyNode dayJourneyNode = new DayJourneyNode("Monday");
 		
 		TravelTime travelTime = new TravelTime("Monday", "10:20");
@@ -109,6 +112,8 @@ public class FareCalculatorVisitorTest {
 	@Test
 	public void testVisitDayJourneyNodeDailyCapNotReached() 
 	{
+		System.out.println("Entering function testVisitDayJourneyNodeDailyCapNotReached############################");
+		
 		DayJourneyNode dayJourneyNode = new DayJourneyNode("Monday");
 		
 		TravelTime travelTime = new TravelTime("Sunday", "10:20");
@@ -131,168 +136,124 @@ public class FareCalculatorVisitorTest {
 	@Test
 	public void testVisitWeekJourneyNode() {
 		
-		WeekJourneyNode weekJourneyNode = new WeekJourneyNode();
+		System.out.println("Entering function testVisitWeekJourneyNode############################");
 		
+		WeekJourneyNode weekJourneyNode = createWeeklyNode();
+		
+		
+		double calculatedFare = weekJourneyNode.accept(new FareCalculatorVisitor());
+		assertEquals("Day Journey Fare Calculation Failed", calculatedFare, 600,0);
+		
+	}
+	
+	private WeekJourneyNode createWeeklyNode()
+	{
+		WeekJourneyNode weekJourneyNode = new WeekJourneyNode();
 		DayJourneyNode dayJourneyNode1 = new DayJourneyNode("Monday");
 		
-		TravelTime travelTime = new TravelTime("Monday", "10:20");
-		SingleJourneyNode singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone21).travelTime(travelTime).build();
-		dayJourneyNode1.addSingleJourneyNode(singleJourneyNode);
-		
-	
-		travelTime = new TravelTime("Monday", "10:45");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode1.addSingleJourneyNode(singleJourneyNode);
-	
-		travelTime = new TravelTime("Monday", "16:15");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode1.addSingleJourneyNode(singleJourneyNode);
-		
-		travelTime = new TravelTime("Monday", "18:15");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode1.addSingleJourneyNode(singleJourneyNode);
-		
-		travelTime = new TravelTime("Monday", "19:00");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone12).travelTime(travelTime).build();
-		dayJourneyNode1.addSingleJourneyNode(singleJourneyNode);
+		dayJourneyNode1.addSingleJourneyNode(createSingleJourneyNode("Monday", "10:20", fromZoneToZone21));
+		dayJourneyNode1.addSingleJourneyNode(createSingleJourneyNode("Monday", "10:45", fromZoneToZone21));
+		dayJourneyNode1.addSingleJourneyNode(createSingleJourneyNode("Monday", "16:15", fromZoneToZone11));
+		dayJourneyNode1.addSingleJourneyNode(createSingleJourneyNode("Monday", "18:15", fromZoneToZone22));
+		dayJourneyNode1.addSingleJourneyNode(createSingleJourneyNode("Monday", "19:00", fromZoneToZone12));
 		
 		weekJourneyNode.addDayJourneyNode(dayJourneyNode1);
 		
+		
 		DayJourneyNode dayJourneyNode2 = new DayJourneyNode("Tuesday");
-		
-		travelTime = new TravelTime("Tuesday", "10:20");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone21).travelTime(travelTime).build();
-		dayJourneyNode2.addSingleJourneyNode(singleJourneyNode);
-	
-		travelTime = new TravelTime("Tuesday", "10:45");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode2.addSingleJourneyNode(singleJourneyNode);
-	
-		travelTime = new TravelTime("Tuesday", "16:15");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode2.addSingleJourneyNode(singleJourneyNode);
-		
-		travelTime = new TravelTime("Tuesday", "18:15");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode2.addSingleJourneyNode(singleJourneyNode);
-		
-		travelTime = new TravelTime("Tuesday", "19:00");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone12).travelTime(travelTime).build();
-		dayJourneyNode2.addSingleJourneyNode(singleJourneyNode);
+		dayJourneyNode2.addSingleJourneyNode(createSingleJourneyNode("Tuesday", "11:20", fromZoneToZone21));
+		dayJourneyNode2.addSingleJourneyNode(createSingleJourneyNode("Tuesday", "15:45", fromZoneToZone11));
+		dayJourneyNode2.addSingleJourneyNode(createSingleJourneyNode("Tuesday", "18:15", fromZoneToZone11));
+		dayJourneyNode2.addSingleJourneyNode(createSingleJourneyNode("Tuesday", "22:15", fromZoneToZone22));
+		dayJourneyNode2.addSingleJourneyNode(createSingleJourneyNode("Tuesday", "23:00", fromZoneToZone12));
 		
 		weekJourneyNode.addDayJourneyNode(dayJourneyNode2);
 		
 		DayJourneyNode dayJourneyNode3 = new DayJourneyNode("Wednesday");
-		
-		travelTime = new TravelTime("Wednesday", "10:20");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone21).travelTime(travelTime).build();
-		dayJourneyNode3.addSingleJourneyNode(singleJourneyNode);
-	
-		travelTime = new TravelTime("Wednesday", "10:45");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode3.addSingleJourneyNode(singleJourneyNode);
-	
-		travelTime = new TravelTime("Wednesday", "16:15");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode3.addSingleJourneyNode(singleJourneyNode);
-		
-		travelTime = new TravelTime("Wednesday", "18:15");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode3.addSingleJourneyNode(singleJourneyNode);
-		
-		travelTime = new TravelTime("Wednesday", "19:00");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone12).travelTime(travelTime).build();
-		dayJourneyNode3.addSingleJourneyNode(singleJourneyNode);
+		dayJourneyNode3.addSingleJourneyNode(createSingleJourneyNode("Wednesday", "08:20", fromZoneToZone21));
+		dayJourneyNode3.addSingleJourneyNode(createSingleJourneyNode("Wednesday", "10:45", fromZoneToZone11));
+		dayJourneyNode3.addSingleJourneyNode(createSingleJourneyNode("Wednesday", "13:15", fromZoneToZone11));
+		dayJourneyNode3.addSingleJourneyNode(createSingleJourneyNode("Wednesday", "18:15", fromZoneToZone22));
+		dayJourneyNode3.addSingleJourneyNode(createSingleJourneyNode("Wednesday", "19:00", fromZoneToZone12));
 		
 		weekJourneyNode.addDayJourneyNode(dayJourneyNode3);
 		
+	
 		DayJourneyNode dayJourneyNode4 = new DayJourneyNode("Thursday");
 		
-		travelTime = new TravelTime("Thursday", "10:20");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone21).travelTime(travelTime).build();
-		dayJourneyNode4.addSingleJourneyNode(singleJourneyNode);
-	
-		travelTime = new TravelTime("Thursday", "10:45");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode4.addSingleJourneyNode(singleJourneyNode);
-	
-		travelTime = new TravelTime("Thursday", "16:15");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode4.addSingleJourneyNode(singleJourneyNode);
-		
-		travelTime = new TravelTime("Thursday", "18:15");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode4.addSingleJourneyNode(singleJourneyNode);
-		
-		travelTime = new TravelTime("Thursday", "19:00");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone12).travelTime(travelTime).build();
-		dayJourneyNode4.addSingleJourneyNode(singleJourneyNode);
+		dayJourneyNode4.addSingleJourneyNode(createSingleJourneyNode("Thursday", "11:20", fromZoneToZone21));
+		dayJourneyNode4.addSingleJourneyNode(createSingleJourneyNode("Thursday", "07:45", fromZoneToZone11));
+		dayJourneyNode4.addSingleJourneyNode(createSingleJourneyNode("Thursday", "19:15", fromZoneToZone11));
+		dayJourneyNode4.addSingleJourneyNode(createSingleJourneyNode("Thursday", "18:15", fromZoneToZone22));
+		dayJourneyNode4.addSingleJourneyNode(createSingleJourneyNode("Thursday", "12:00", fromZoneToZone12));
 		
 		weekJourneyNode.addDayJourneyNode(dayJourneyNode4);
 		
 		DayJourneyNode dayJourneyNode5 = new DayJourneyNode("Saturday");
 		
-		travelTime = new TravelTime("Saturday", "10:20");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone21).travelTime(travelTime).build();
-		dayJourneyNode5.addSingleJourneyNode(singleJourneyNode);
-	
-		travelTime = new TravelTime("Saturday", "10:45");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode5.addSingleJourneyNode(singleJourneyNode);
-	
-		travelTime = new TravelTime("Saturday", "16:15");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode5.addSingleJourneyNode(singleJourneyNode);
-		
-		travelTime = new TravelTime("Saturday", "18:15");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
-		dayJourneyNode5.addSingleJourneyNode(singleJourneyNode);
-		
-		travelTime = new TravelTime("Saturday", "19:00");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone12).travelTime(travelTime).build();
-		dayJourneyNode5.addSingleJourneyNode(singleJourneyNode);
+		dayJourneyNode5.addSingleJourneyNode(createSingleJourneyNode("Saturday", "11:20", fromZoneToZone21));
+		dayJourneyNode5.addSingleJourneyNode(createSingleJourneyNode("Saturday", "07:45", fromZoneToZone11));
+		dayJourneyNode5.addSingleJourneyNode(createSingleJourneyNode("Saturday", "19:15", fromZoneToZone11));
+		dayJourneyNode5.addSingleJourneyNode(createSingleJourneyNode("Saturday", "18:15", fromZoneToZone22));
+		dayJourneyNode5.addSingleJourneyNode(createSingleJourneyNode("Saturday", "12:00", fromZoneToZone12));
 		
 		weekJourneyNode.addDayJourneyNode(dayJourneyNode5);
 		
+		
+		
+		return weekJourneyNode;
 	}
 
 	@Test
 	public void testVisitOverallJourneyNode() {
-		//fail("Not yet implemented");
+		
+		System.out.println("Entering function testVisitOverallJourneyNode############################");
+		OverallJourneyNode overallJourneyNode = new OverallJourneyNode();
+		overallJourneyNode.addWeekJourneyNode(createWeeklyNode());
+		overallJourneyNode.addWeekJourneyNode(createWeeklyNode());
+		overallJourneyNode.addWeekJourneyNode(createWeeklyNode());
+		overallJourneyNode.addWeekJourneyNode(createWeeklyNode());
+		
+		double calculatedFare = overallJourneyNode.accept(new FareCalculatorVisitor());
+		assertEquals("Overall Journey Fare Calculation Failed", calculatedFare, 2400,0);
+		
 	}
 
 	@Test
 	public void testVisitSingleJourneyNode() {
-		
-		TravelTime travelTime = new TravelTime("Monday", "10:20");
-		SingleJourneyNode singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone21).travelTime(travelTime).build();
+		System.out.println("Entering function testVisitSingleJourneyNode############################");
+		SingleJourneyNode singleJourneyNode = createSingleJourneyNode("Monday", "10:20",fromZoneToZone21);
 		double singleJourneyFare = singleJourneyNode.accept(new FareCalculatorVisitor());
 		assertEquals("Single Journey Fare Calculation Failed", singleJourneyFare, 35,0);
 		
-		travelTime = new TravelTime("Monday", "10:45");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
+		singleJourneyNode = createSingleJourneyNode("Monday", "10:45",fromZoneToZone11);
 		singleJourneyFare = singleJourneyNode.accept(new FareCalculatorVisitor());
 		assertEquals("Single Journey Fare Calculation Failed", singleJourneyFare, 25,0);
 		
 		
-		travelTime = new TravelTime("Monday", "16:15");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
+		singleJourneyNode = createSingleJourneyNode("Monday", "16:15",fromZoneToZone11);
 		singleJourneyFare = singleJourneyNode.accept(new FareCalculatorVisitor());
 		assertEquals("Single Journey Fare Calculation Failed", singleJourneyFare, 25,0);
 		
 		
-		
-		travelTime = new TravelTime("Sunday", "09:15");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).travelTime(travelTime).build();
+		singleJourneyNode = createSingleJourneyNode("Sunday", "09:15",fromZoneToZone11);
 		singleJourneyFare = singleJourneyNode.accept(new FareCalculatorVisitor());
 		assertEquals("Single Journey Fare Calculation Failed", singleJourneyFare, 30,0);
 	
-		travelTime = new TravelTime("Monday", "11:20");
-		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone12).travelTime(travelTime).build();
+		singleJourneyNode = createSingleJourneyNode("Monday", "11:20",fromZoneToZone12);
 		singleJourneyFare = singleJourneyNode.accept(new FareCalculatorVisitor());
 		assertEquals("Single Journey Fare Calculation Failed", singleJourneyFare, 30,0);
 
 		
 	}
 
+	private SingleJourneyNode createSingleJourneyNode(String day, String time, FromZoneToZone fromZoneToZone) {
+		TravelTime travelTime = new TravelTime(day, time);
+		SingleJourneyNode singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone).travelTime(travelTime).build();
+		return singleJourneyNode;
+	}
+	
+	
+	
+	
 }

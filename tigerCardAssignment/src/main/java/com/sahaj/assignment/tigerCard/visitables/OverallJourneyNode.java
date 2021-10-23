@@ -10,12 +10,7 @@ public class OverallJourneyNode implements IJourneyNode
 {
 	
 	private List<WeekJourneyNode> weekJourneys = new ArrayList<WeekJourneyNode>();
-	
-	
-	public double getJourneyFare()
-	{
-		return 0;
-	}
+	private double calculatedFare = 0;
 	
 	
 	public void addWeekJourneyNode(WeekJourneyNode weekJourneyNode)
@@ -31,7 +26,21 @@ public class OverallJourneyNode implements IJourneyNode
 
 	public double accept(IVisitor visitor) {
 		
-		return visitor.visit(this);
+		calculatedFare = visitor.visit(this);
+		System.out.println("Overall Journey Calculation:" + this.toString());
+		return calculatedFare;
 	}
 
+
+	
+	
+	@Override
+	public String toString() {
+		
+		StringBuilder weekJourneyNodeBuilder = new StringBuilder();
+		weekJourneyNodeBuilder.append(this.calculatedFare);
+		
+		
+		return weekJourneyNodeBuilder.toString();
+	}
 }
