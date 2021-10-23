@@ -74,7 +74,7 @@ public class TravelTime {
 	
 	private boolean isWeekend()
 	{
-		boolean isWeekend = DayOfWeek.SATURDAY.name().equals(day) || DayOfWeek.SUNDAY.name().equals(day) ? true : false;
+		boolean isWeekend = DayOfWeek.SATURDAY.name().equalsIgnoreCase(day) || DayOfWeek.SUNDAY.name().equalsIgnoreCase(day) ? true : false;
 		
 		return isWeekend;
 	}

@@ -14,18 +14,12 @@ public class DayJourneyNode implements IJourneyNode{
 	private String explanation;
 	
 	private List<SingleJourneyNode>  singleJourneys = new ArrayList<SingleJourneyNode>();
-	
+
 	
 	public DayJourneyNode(DayJourneyNodeBuilder dayJourneyNodeBuilder)
 	{
 		this.day = dayJourneyNodeBuilder.day;
 		this.explanation = dayJourneyNodeBuilder.explanation;
-	}
-	
-	
-	public double getJourneyFare()
-	{
-		return 0;
 	}
 	
 	
@@ -42,7 +36,6 @@ public class DayJourneyNode implements IJourneyNode{
 	public ZoneTravelMaster getFarthestTravelZone()
 	{
 
-		double dailyDareCapForFarthestJourney = 0;
 		ZoneTravelMaster farthestTravelZone = null;
 		
 		ZoneTravelMaster travelMaster;
@@ -52,7 +45,7 @@ public class DayJourneyNode implements IJourneyNode{
 			
 			travelMaster = ZoneTravelMasterManager.INSTANCE.getZoneMasterDataForFromZoneToZone(singleJourneyNode.getFromZoneToZone());
 			
-			if( dailyDareCapForFarthestJourney < travelMaster.getDailyCapFare() )
+			if( farthestTravelZone == null || farthestTravelZone.getDailyCapFare() < travelMaster.getDailyCapFare() )
 			{
 				farthestTravelZone = travelMaster;
 			}
@@ -75,7 +68,7 @@ public class DayJourneyNode implements IJourneyNode{
 			return this;
 		}
 		
-		public DayJourneyNodeBuilder fromZoneToZone(String explanation) 
+		public DayJourneyNodeBuilder explanation(String explanation) 
 		{
 			this.explanation = explanation;
 			return this;

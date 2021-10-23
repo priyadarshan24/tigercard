@@ -2,6 +2,11 @@ package com.sahaj.assignment.tigerCard.pojos;
 
 public class ZoneTravelMaster {
 	
+	public FromZoneToZone getFromZoneToZone() {
+		return fromZoneToZone;
+	}
+
+
 	private FromZoneToZone fromZoneToZone;
 	
 	private double peakHourFare;
@@ -35,11 +40,11 @@ public class ZoneTravelMaster {
 
 	private ZoneTravelMaster(ZoneTravelMasterBuilder builder)
 	{
-		builder.fromZoneToZone = this.fromZoneToZone;
-		builder.peakHourFare = this.peakHourFare;
-		builder.offPeakHourFare = this.offPeakHourFare;
-		builder.dailyCapFare = this.dailyCapFare;
-		builder.weeklyCapFare = this.weeklyCapFare;
+		this.fromZoneToZone = builder.fromZoneToZone;
+		this.peakHourFare = builder.peakHourFare;
+		this.offPeakHourFare = builder.offPeakHourFare;
+		this.dailyCapFare = builder.dailyCapFare;
+		this.weeklyCapFare = builder.weeklyCapFare;
 	}
 	
 	

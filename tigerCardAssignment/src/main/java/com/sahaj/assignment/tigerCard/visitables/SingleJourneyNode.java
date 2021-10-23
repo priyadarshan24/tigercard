@@ -23,7 +23,7 @@ public class SingleJourneyNode implements IJourneyNode{
 	private String explanation;
 	
 	
-	public SingleJourneyNode(SingleJourneyNodeBuilder singleJourneyNodeBuilder)
+	private SingleJourneyNode(SingleJourneyNodeBuilder singleJourneyNodeBuilder)
 	{
 		this.fromZoneToZone = singleJourneyNodeBuilder.fromZoneToZone;
 		this.travelTime = singleJourneyNodeBuilder.travelTime;

@@ -30,7 +30,7 @@ public class TravelTimeTest {
 	
 
 	@Test
-	public void testIsPeakHourTravelTime() {
+	public void testIsPeakHourTravelTimeForWeekdays() {
 		
 		TravelTime travelTime = new TravelTime("Monday", "07:00");
 		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
@@ -79,6 +79,98 @@ public class TravelTimeTest {
 		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
 		
 		travelTime = new TravelTime("Friday", "20:01");
+		assertFalse("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		
+	}
+	
+	
+	@Test
+	public void testIsPeakHourTravelTimeForWeekends() {
+		
+		TravelTime travelTime = new TravelTime("Saturday", "09:00");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Saturday", "11:00");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Saturday", "18:00");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Saturday", "22:00");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		
+		//testing newr about boundary value cases
+		travelTime = new TravelTime("Saturday", "08:59");
+		assertFalse("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Saturday", "09:01");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Saturday", "11:01");
+		assertFalse("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Saturday", "10:59");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Saturday", "17:59");
+		assertFalse("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Saturday", "18:01");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Saturday", "22:01");
+		assertFalse("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Saturday", "10:59");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		
+
+		
+	//Test the boundary value conditions for SUnday
+		travelTime = new TravelTime("Sunday", "09:00");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Sunday", "11:00");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Sunday", "18:00");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Sunday", "22:00");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		
+		//testing newr about boundary value cases
+		travelTime = new TravelTime("Sunday", "08:59");
+		assertFalse("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Sunday", "09:01");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Sunday", "11:01");
+		assertFalse("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Sunday", "10:59");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Sunday", "17:59");
+		assertFalse("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Sunday", "18:01");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Sunday", "22:01");
+		assertFalse("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		travelTime = new TravelTime("Sunday", "10:59");
+		assertTrue("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
+		
+		
+		
+		travelTime = new TravelTime("Sunday", "00:00");
 		assertFalse("Peak hour calculation failed for " + travelTime, travelTime.isPeakHourTravelTime());
 		
 		
