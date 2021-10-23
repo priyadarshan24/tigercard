@@ -14,6 +14,7 @@ public class SingleJourneyNode implements IJourneyNode{
 
 	private FromZoneToZone fromZoneToZone;
 	private TravelTime travelTime;
+	private double calculatedFare;
 	
 	
 	public TravelTime getTravelTime() {
@@ -100,9 +101,29 @@ public class SingleJourneyNode implements IJourneyNode{
 
 	public double accept(IVisitor visitor) {
 		
-		return visitor.visit(this);
+		calculatedFare = visitor.visit(this);
+		System.out.println("Single Journey Calculation:" + this.toString());
+		return calculatedFare;
 		
 	}
+
+
+	@Override
+	public String toString() {
+		StringBuilder singleJourneyNodeBuilder = new StringBuilder();
+		singleJourneyNodeBuilder.append(this.travelTime);
+		singleJourneyNodeBuilder.append("|");
+		singleJourneyNodeBuilder.append(this.fromZoneToZone);
+		singleJourneyNodeBuilder.append("|");
+		singleJourneyNodeBuilder.append(this.calculatedFare);
+		singleJourneyNodeBuilder.append("|");
+		singleJourneyNodeBuilder.append(this.explanation);
+		
+		
+		return singleJourneyNodeBuilder.toString();
+	}
+	
+	
 	
 
 }

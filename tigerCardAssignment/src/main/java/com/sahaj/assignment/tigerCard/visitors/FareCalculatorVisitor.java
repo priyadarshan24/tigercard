@@ -12,7 +12,8 @@ public class FareCalculatorVisitor implements IVisitor{
 	public double visit(DayJourneyNode dayJourneyNode) {
 		
 		double dayJourneyFare = 0;
-		ZoneTravelMaster farthestTravelZone = null;
+	
+		ZoneTravelMaster farthestTravelZone = dayJourneyNode.getFarthestTravelZone();
 		
 		for( SingleJourneyNode singleJourneyNode : dayJourneyNode.getSingleJourneys() )
 		{
@@ -21,9 +22,19 @@ public class FareCalculatorVisitor implements IVisitor{
 			
 		}
 		
-		farthestTravelZone = dayJourneyNode.getFarthestTravelZone();
 		
-		dayJourneyFare = dayJourneyFare > farthestTravelZone.getDailyCapFare() ? farthestTravelZone.getDailyCapFare() : dayJourneyFare;
+		
+		if( dayJourneyFare > farthestTravelZone.getDailyCapFare() )
+		{
+			dayJourneyFare = farthestTravelZone.getDailyCapFare();
+			dayJourneyNode.setExplanation("Daily cap reached");
+		}
+		else
+		{
+			dayJourneyNode.setExplanation("Daily cap not reached");
+		}
+		
+		//dayJourneyFare = dayJourneyFare > farthestTravelZone.getDailyCapFare() ? farthestTravelZone.getDailyCapFare() : dayJourneyFare;
 		
 		return dayJourneyFare;
 	}

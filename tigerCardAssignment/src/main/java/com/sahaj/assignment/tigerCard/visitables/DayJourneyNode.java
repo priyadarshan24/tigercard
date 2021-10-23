@@ -10,16 +10,21 @@ import com.sahaj.assignment.tigerCard.visitors.IVisitor;
 
 public class DayJourneyNode implements IJourneyNode{
 	
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
+	}
+
+
 	private String day;
 	private String explanation;
+	private double calculatedFare = 0;
 	
 	private List<SingleJourneyNode>  singleJourneys = new ArrayList<SingleJourneyNode>();
 
 	
-	public DayJourneyNode(DayJourneyNodeBuilder dayJourneyNodeBuilder)
+	public DayJourneyNode(String day)
 	{
-		this.day = dayJourneyNodeBuilder.day;
-		this.explanation = dayJourneyNodeBuilder.explanation;
+		this.day = day;
 	}
 	
 	
@@ -56,39 +61,27 @@ public class DayJourneyNode implements IJourneyNode{
 		
 	}
 	
-	public static class DayJourneyNodeBuilder 
-	{
-		private String day;
-		private String explanation;
-		
-		
-		public DayJourneyNodeBuilder day(String day) 
-		{
-			this.day = day;
-			return this;
-		}
-		
-		public DayJourneyNodeBuilder explanation(String explanation) 
-		{
-			this.explanation = explanation;
-			return this;
-		}
-		
-		
-		public DayJourneyNode build()
-		{
-			return new DayJourneyNode(this);
-		}
-		
-		
-		
-	}
 
 	public double accept(IVisitor visitor) {
 		
-		return 0;
+		calculatedFare = visitor.visit(this);
+		System.out.println("Day Journey Calculation:" + this.toString());
+		return calculatedFare;
 		
 	}
 	
+	
+	@Override
+	public String toString() {
+		StringBuilder singleJourneyNodeBuilder = new StringBuilder();
+		singleJourneyNodeBuilder.append(day);
+		singleJourneyNodeBuilder.append("|");
+		singleJourneyNodeBuilder.append(this.calculatedFare);
+		singleJourneyNodeBuilder.append("|");
+		singleJourneyNodeBuilder.append(this.explanation);
+		
+		
+		return singleJourneyNodeBuilder.toString();
+	}
 
 }

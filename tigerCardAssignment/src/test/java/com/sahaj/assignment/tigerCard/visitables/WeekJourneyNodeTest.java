@@ -53,7 +53,7 @@ public class WeekJourneyNodeTest {
 	@Test
 	public void testGetFarthestTravelZoneDuringWeek() 
 	{
-		DayJourneyNode dayJourneyNode1 = new DayJourneyNode.DayJourneyNodeBuilder().build();
+		DayJourneyNode dayJourneyNode1 = new DayJourneyNode("Monday");
 		
 		SingleJourneyNode singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).build();
 		dayJourneyNode1.addSingleJourneyNode(singleJourneyNode);
@@ -66,7 +66,7 @@ public class WeekJourneyNodeTest {
 		
 		
 		
-		DayJourneyNode dayJourneyNode2 = new DayJourneyNode.DayJourneyNodeBuilder().build();
+		DayJourneyNode dayJourneyNode2 = new DayJourneyNode("Tuesday");
 		
 		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone33).build();
 		dayJourneyNode2.addSingleJourneyNode(singleJourneyNode);
@@ -75,7 +75,7 @@ public class WeekJourneyNodeTest {
 		dayJourneyNode2.addSingleJourneyNode(singleJourneyNode);
 		
 		
-		DayJourneyNode dayJourneyNode3 = new DayJourneyNode.DayJourneyNodeBuilder().build();
+		DayJourneyNode dayJourneyNode3 = new DayJourneyNode("Wednesday");
 		
 		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).build();
 		dayJourneyNode3.addSingleJourneyNode(singleJourneyNode);
@@ -103,7 +103,7 @@ public class WeekJourneyNodeTest {
 	@Test
 	public void testGetFarthestTravelZoneDuringWeek2() 
 	{
-		DayJourneyNode dayJourneyNode1 = new DayJourneyNode.DayJourneyNodeBuilder().build();
+		DayJourneyNode dayJourneyNode1 = new DayJourneyNode("Monday");
 		
 		SingleJourneyNode singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).build();
 		dayJourneyNode1.addSingleJourneyNode(singleJourneyNode);
@@ -116,7 +116,7 @@ public class WeekJourneyNodeTest {
 		
 		
 		
-		DayJourneyNode dayJourneyNode2 = new DayJourneyNode.DayJourneyNodeBuilder().build();
+		DayJourneyNode dayJourneyNode2 = new DayJourneyNode("Tuesday");
 		
 		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone13).build();
 		dayJourneyNode2.addSingleJourneyNode(singleJourneyNode);
@@ -128,7 +128,7 @@ public class WeekJourneyNodeTest {
 		dayJourneyNode2.addSingleJourneyNode(singleJourneyNode);
 		
 		
-		DayJourneyNode dayJourneyNode3 = new DayJourneyNode.DayJourneyNodeBuilder().build();
+		DayJourneyNode dayJourneyNode3 = new DayJourneyNode("Wednesday");
 		
 		singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).build();
 		dayJourneyNode3.addSingleJourneyNode(singleJourneyNode);

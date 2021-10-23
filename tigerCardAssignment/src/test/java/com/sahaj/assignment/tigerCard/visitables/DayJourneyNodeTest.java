@@ -58,7 +58,7 @@ public class DayJourneyNodeTest {
 	@Test
 	public void testGetFarthestTravelZone() {
 		
-		DayJourneyNode dayJourneyNode = new DayJourneyNode.DayJourneyNodeBuilder().build();
+		DayJourneyNode dayJourneyNode = new DayJourneyNode("Monday");
 		
 		SingleJourneyNode singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().fromZoneToZone(fromZoneToZone11).build();
 		dayJourneyNode.addSingleJourneyNode(singleJourneyNode);
