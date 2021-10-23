@@ -1,6 +1,7 @@
 package com.sahaj.assignment.tigerCard.visitors;
 
 import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMaster;
+import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMasterManager;
 import com.sahaj.assignment.tigerCard.visitables.DayJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.OverallJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.SingleJourneyNode;
@@ -16,7 +17,7 @@ public class FareCalculatorVisitor implements IVisitor{
 		for( SingleJourneyNode singleJourneyNode : dayJourneyNode.getSingleJourneys() )
 		{
 			
-			dayJourneyFare += singleJourneyNode.getJourneyFare();
+			dayJourneyFare += singleJourneyNode.accept(this);
 			
 		}
 		
@@ -56,5 +57,32 @@ public class FareCalculatorVisitor implements IVisitor{
 		}
 		return totalJourneyFare;
 	}
+	
+	
+	public double visit(SingleJourneyNode singJourneyNode) {
+		
+		double journeyFare = 0;
+		
+		ZoneTravelMasterManager travelMasterManager = ZoneTravelMasterManager.INSTANCE;
+		ZoneTravelMaster travelMaster = travelMasterManager.getZoneMasterDataForFromZoneToZone(singJourneyNode.getFromZoneToZone());
+		
+		if( singJourneyNode.getTravelTime().isPeakHourTravelTime() )
+		{
+			journeyFare = travelMaster.getPeakHourFare();
+			singJourneyNode.setExplanation("Peak Hour Fare Applied");
+		}
+		else
+		{
+			journeyFare = travelMaster.getOffPeakHourFare();
+			singJourneyNode.setExplanation("Off Peak Hour Fare Applied");
+		}
+		
+		
+		return journeyFare;
+	}
+	
+	
+	
+	
 
 }

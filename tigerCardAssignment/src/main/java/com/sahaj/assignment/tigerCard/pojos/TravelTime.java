@@ -23,6 +23,8 @@ public class TravelTime {
 	public static final int WEEKEND_EVENING_PEAKHOUR_END_TIME_IN_SECS = 0;
 	
 	
+	
+	
 	private String time;
 	private String day;
 	
