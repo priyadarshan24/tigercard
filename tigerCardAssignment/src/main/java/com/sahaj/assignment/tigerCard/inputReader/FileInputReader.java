@@ -15,7 +15,7 @@ import com.sahaj.assignment.tigerCard.visitables.OverallJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.SingleJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.WeekJourneyNode;
 
-public enum FileInputReader implements IInputReader {
+public enum FileInputReader {
 	
 	INSTANCE;
 	
@@ -29,7 +29,7 @@ public enum FileInputReader implements IInputReader {
 	private Map<String, DayJourneyNode> dayJourneyNodeMap = new HashMap<String, DayJourneyNode>();
 	private Map<Integer,WeekJourneyNode> weekJourneyNodeMap = new HashMap<Integer, WeekJourneyNode>();
 		
-	@Override
+	
 	public JourneyNode readInput(String inputFileFolder, String fileName) 
 	{
 		
