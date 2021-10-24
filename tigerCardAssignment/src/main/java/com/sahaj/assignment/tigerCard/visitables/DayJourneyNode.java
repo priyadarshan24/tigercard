@@ -18,6 +18,11 @@ public class DayJourneyNode extends JourneyNode{
 	
 	public DayJourneyNode(String day)
 	{
+		if( day == null || day.isBlank() )
+		{
+			throw new IllegalArgumentException("Day Parameter cannot be blank or Empty");
+		}
+		
 		this.day = day;
 	}
 	
@@ -58,9 +63,7 @@ public class DayJourneyNode extends JourneyNode{
 
 	public double accept(IVisitor visitor) {
 		
-		calculatedFare = visitor.visit(this);
-		//System.out.println("Day Journey Calculation:" + this.toString());
-		return calculatedFare;
+		return calculatedFare = visitor.visit(this);
 		
 	}
 	

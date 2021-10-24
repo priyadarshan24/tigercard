@@ -56,9 +56,7 @@ public class WeekJourneyNode extends JourneyNode
 
 	public double accept(IVisitor visitor) {
 		
-		calculatedFare = visitor.visit(this);
-	//	System.out.println("Week Journey Calculation:" + this.toString());
-		return calculatedFare;
+		return calculatedFare = visitor.visit(this);
 		
 	}
 	

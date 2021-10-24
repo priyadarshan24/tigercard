@@ -6,8 +6,6 @@ import com.sahaj.assignment.tigerCard.visitors.IVisitor;
 
 public class SingleJourneyNode extends JourneyNode{
 	
-	
-
 
 	private FromZoneToZone fromZoneToZone;
 	private TravelTime travelTime;
@@ -26,20 +24,9 @@ public class SingleJourneyNode extends JourneyNode{
 	{
 		this.fromZoneToZone = singleJourneyNodeBuilder.fromZoneToZone;
 		this.travelTime = singleJourneyNodeBuilder.travelTime;
-		this.explanation = singleJourneyNodeBuilder.explanation;
+		
 	}
 	
-	public String getExplanation() {
-		return explanation;
-	}
-
-	//Encapsulation of Field
-	public void setExplanation(String explanation) {
-		if( explanation != null && !explanation.isBlank() )
-		{
-			this.explanation = explanation;
-		}
-	}
 	
 	//hide the delegate pattern
 	public String getJourneyDay()
@@ -53,7 +40,6 @@ public class SingleJourneyNode extends JourneyNode{
 	{
 		private FromZoneToZone fromZoneToZone;
 		private TravelTime travelTime;
-		private String explanation;
 		
 		
 		public SingleJourneyNodeBuilder fromZoneToZone(FromZoneToZone fromZoneToZone) 
@@ -69,18 +55,10 @@ public class SingleJourneyNode extends JourneyNode{
 		}
 		
 		
-		public SingleJourneyNodeBuilder fromZoneToZone(String explanation) 
-		{
-			this.explanation = explanation;
-			return this;
-		}
-		
-		
 		public SingleJourneyNode build()
 		{
 			return new SingleJourneyNode(this);
 		}
-		
 		
 		
 	}
@@ -89,9 +67,8 @@ public class SingleJourneyNode extends JourneyNode{
 
 	public double accept(IVisitor visitor) {
 		
-		calculatedFare = visitor.visit(this);
-		//System.out.println("Single Journey Calculation:" + this.toString());
-		return calculatedFare;
+		return calculatedFare = visitor.visit(this);
+
 		
 	}
 

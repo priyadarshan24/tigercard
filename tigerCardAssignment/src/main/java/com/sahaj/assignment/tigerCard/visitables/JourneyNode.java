@@ -10,7 +10,12 @@ public abstract class JourneyNode implements IVisitable {
 		return calculatedFare;
 	}
 	public void setExplanation(String explanation) {
-		this.explanation = explanation;
+		
+		if( explanation != null && !explanation.isBlank())
+		{
+			this.explanation = explanation;
+		}
+		
 	}
 	
 	

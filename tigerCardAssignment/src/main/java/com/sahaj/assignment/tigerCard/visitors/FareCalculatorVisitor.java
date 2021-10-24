@@ -22,8 +22,6 @@ public class FareCalculatorVisitor implements IVisitor{
 			
 		}
 		
-		
-		
 		if( dayJourneyFare > farthestTravelZone.getDailyCapFare() )
 		{
 			dayJourneyFare = farthestTravelZone.getDailyCapFare();
@@ -34,7 +32,6 @@ public class FareCalculatorVisitor implements IVisitor{
 			dayJourneyNode.setExplanation("Daily cap not reached");
 		}
 		
-		//dayJourneyFare = dayJourneyFare > farthestTravelZone.getDailyCapFare() ? farthestTravelZone.getDailyCapFare() : dayJourneyFare;
 		
 		return dayJourneyFare;
 	}
@@ -43,6 +40,8 @@ public class FareCalculatorVisitor implements IVisitor{
 		
 		double weeklyJourneyFare = 0;
 		
+		ZoneTravelMaster farthestTravelZone = weekJourneyNode.getFarthestTravelZoneDuringWeek();
+		
 		for( DayJourneyNode dayJourneyNode : weekJourneyNode.getDayJourneys() )
 		{
 			
@@ -50,9 +49,16 @@ public class FareCalculatorVisitor implements IVisitor{
 			
 		}
 		
-		double weeklyCappedFareForFarthestZoneTravelled = weekJourneyNode.getFarthestTravelZoneDuringWeek().getWeeklyCapFare();
 		
-		weeklyJourneyFare = weeklyJourneyFare > weeklyCappedFareForFarthestZoneTravelled ? weeklyCappedFareForFarthestZoneTravelled : weeklyJourneyFare;
+		if( weeklyJourneyFare > farthestTravelZone.getWeeklyCapFare() )
+		{
+			weeklyJourneyFare = farthestTravelZone.getWeeklyCapFare();
+			weekJourneyNode.setExplanation("Weekly cap reached");
+		}
+		else
+		{
+			weekJourneyNode.setExplanation("Weekly cap not reached");
+		}
 		
 		return weeklyJourneyFare;
 		
