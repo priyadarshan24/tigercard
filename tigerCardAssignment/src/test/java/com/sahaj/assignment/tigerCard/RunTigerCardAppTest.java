@@ -33,7 +33,7 @@ public class RunTigerCardAppTest {
 		JourneyNode iJourneyNode = FileInputReader.INSTANCE.readInput(inputFileFolder, RunTigerCardApp.INPUT_JOURNEYS_FILE_NAME);
 		double totalJourneyFare = iJourneyNode.accept(new FareCalculatorVisitor());
 		
-		assertEquals(310, totalJourneyFare, 0);
+		assertEquals(665, totalJourneyFare, 0);
 	}
 
 }

@@ -1,5 +1,5 @@
 #Inputformat >> weekday/weekend, peakHourStartTime(hh:mm), peakHourEndTime(hh:mm)
 weekday,07:00,10:30
 weekday,17:00,20:00
-weekend,09:00,11.00
+weekend,09:00,11:00
 weekend,18:00,22:00
