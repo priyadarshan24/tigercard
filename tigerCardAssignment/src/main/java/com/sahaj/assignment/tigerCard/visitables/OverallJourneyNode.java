@@ -6,11 +6,10 @@ import java.util.List;
 
 import com.sahaj.assignment.tigerCard.visitors.IVisitor;
 
-public class OverallJourneyNode implements IJourneyNode
+public class OverallJourneyNode extends JourneyNode
 {
 	
 	private List<WeekJourneyNode> weekJourneys = new ArrayList<WeekJourneyNode>();
-	private double calculatedFare = 0;
 	
 	
 	public void addWeekJourneyNode(WeekJourneyNode weekJourneyNode)

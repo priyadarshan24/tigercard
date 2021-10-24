@@ -7,12 +7,9 @@ import java.util.List;
 import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMaster;
 import com.sahaj.assignment.tigerCard.visitors.IVisitor;
 
-public class WeekJourneyNode implements IJourneyNode
+public class WeekJourneyNode extends JourneyNode
 {
 	
-	private String explanation;
-	
-	private double calculatedFare = 0;
 	
 	private List<DayJourneyNode> dayJourneys = new ArrayList<DayJourneyNode>();
 	

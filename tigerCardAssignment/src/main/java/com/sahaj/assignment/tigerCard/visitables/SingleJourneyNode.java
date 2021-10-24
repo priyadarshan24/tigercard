@@ -4,25 +4,23 @@ import com.sahaj.assignment.tigerCard.pojos.FromZoneToZone;
 import com.sahaj.assignment.tigerCard.pojos.TravelTime;
 import com.sahaj.assignment.tigerCard.visitors.IVisitor;
 
-public class SingleJourneyNode implements IJourneyNode{
+public class SingleJourneyNode extends JourneyNode{
 	
-	public FromZoneToZone getFromZoneToZone() {
-		return fromZoneToZone;
-	}
-
+	
 
 
 	private FromZoneToZone fromZoneToZone;
 	private TravelTime travelTime;
-	private double calculatedFare;
 	
+	
+	public FromZoneToZone getFromZoneToZone() {
+		return fromZoneToZone;
+	}
 	
 	public TravelTime getTravelTime() {
 		return travelTime;
 	}
-	
-	private String explanation;
-	
+		
 	
 	private SingleJourneyNode(SingleJourneyNodeBuilder singleJourneyNodeBuilder)
 	{

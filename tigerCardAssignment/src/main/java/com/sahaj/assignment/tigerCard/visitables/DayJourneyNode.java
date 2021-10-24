@@ -8,16 +8,10 @@ import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMaster;
 import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMasterManager;
 import com.sahaj.assignment.tigerCard.visitors.IVisitor;
 
-public class DayJourneyNode implements IJourneyNode{
+public class DayJourneyNode extends JourneyNode{
 	
-	public void setExplanation(String explanation) {
-		this.explanation = explanation;
-	}
-
-
+	
 	private String day;
-	private String explanation;
-	private double calculatedFare = 0;
 	
 	private List<SingleJourneyNode>  singleJourneys = new ArrayList<SingleJourneyNode>();
 

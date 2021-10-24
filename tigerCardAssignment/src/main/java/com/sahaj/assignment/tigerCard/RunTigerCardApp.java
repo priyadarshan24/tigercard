@@ -12,7 +12,7 @@ import com.sahaj.assignment.tigerCard.pojos.PeakHourTimingsMasterManager;
 import com.sahaj.assignment.tigerCard.pojos.TravelTime;
 import com.sahaj.assignment.tigerCard.pojos.ZoneTravelMasterManager;
 import com.sahaj.assignment.tigerCard.visitables.DayJourneyNode;
-import com.sahaj.assignment.tigerCard.visitables.IJourneyNode;
+import com.sahaj.assignment.tigerCard.visitables.JourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.OverallJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.SingleJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.WeekJourneyNode;
@@ -45,7 +45,7 @@ public class RunTigerCardApp {
 		
 		RunTigerCardApp runTigerCardApp = new RunTigerCardApp();
 		
-		IJourneyNode iJourneyNode = runTigerCardApp.readInputJourney(inputFileFolder, "inputjourneys.txt");
+		JourneyNode iJourneyNode = runTigerCardApp.readInputJourney(inputFileFolder, "inputjourneys.txt");
 		
 		double totalJourneyFare = iJourneyNode.accept(new FareCalculatorVisitor());
 		System.out.println("Printing journeyFare::" + totalJourneyFare);
@@ -55,7 +55,7 @@ public class RunTigerCardApp {
 	
 	
 	@SuppressWarnings("unused")
-	public IJourneyNode readInputJourney(String inputFileFolder, String fileName)
+	public JourneyNode readInputJourney(String inputFileFolder, String fileName)
 	{
 		
 		File inputJourneyFile = new File(inputFileFolder, fileName);
