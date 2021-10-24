@@ -59,7 +59,7 @@ public class DayJourneyNode extends JourneyNode{
 	public double accept(IVisitor visitor) {
 		
 		calculatedFare = visitor.visit(this);
-		System.out.println("Day Journey Calculation:" + this.toString());
+		//System.out.println("Day Journey Calculation:" + this.toString());
 		return calculatedFare;
 		
 	}

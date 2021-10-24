@@ -4,8 +4,6 @@ import com.sahaj.assignment.tigerCard.utils.TigerCardUtil;
 
 public class PeakHourTimings {
 	
-	
-	
 	private String peakHourStart;
 	private String peakHourEnd;
 	

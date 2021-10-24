@@ -26,7 +26,7 @@ public class OverallJourneyNode extends JourneyNode
 	public double accept(IVisitor visitor) {
 		
 		calculatedFare = visitor.visit(this);
-		System.out.println("Overall Journey Calculation:" + this.toString());
+		//System.out.println("Overall Journey Calculation:" + this.toString());
 		return calculatedFare;
 	}
 

@@ -29,26 +29,6 @@ public class SingleJourneyNode extends JourneyNode{
 		this.explanation = singleJourneyNodeBuilder.explanation;
 	}
 	
-	
-	/*
-	 * public double getJourneyFare() { double journeyFare = 0;
-	 * 
-	 * ZoneTravelMasterManager travelMasterManager =
-	 * ZoneTravelMasterManager.INSTANCE; ZoneTravelMaster travelMaster =
-	 * travelMasterManager.getZoneMasterDataForFromZoneToZone(fromZoneToZone);
-	 * 
-	 * if( this.travelTime.isPeakHourTravelTime() ) { journeyFare =
-	 * travelMaster.getPeakHourFare(); setExplanation("Peak Hour Fare Applied"); }
-	 * else { journeyFare = travelMaster.getOffPeakHourFare();
-	 * setExplanation("Off Peak Hour Fare Applied"); }
-	 * 
-	 * 
-	 * return journeyFare;
-	 * 
-	 * }
-	 */
-	
-	
 	public String getExplanation() {
 		return explanation;
 	}
@@ -105,7 +85,7 @@ public class SingleJourneyNode extends JourneyNode{
 	public double accept(IVisitor visitor) {
 		
 		calculatedFare = visitor.visit(this);
-		System.out.println("Single Journey Calculation:" + this.toString());
+		//System.out.println("Single Journey Calculation:" + this.toString());
 		return calculatedFare;
 		
 	}
