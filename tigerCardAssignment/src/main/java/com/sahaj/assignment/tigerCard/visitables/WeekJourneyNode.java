@@ -27,6 +27,11 @@ public class WeekJourneyNode implements IJourneyNode
 		return Collections.unmodifiableList(dayJourneys);
 	}
 	
+	public boolean contains(DayJourneyNode dayJourneyNode)
+	{
+		return dayJourneys.contains(dayJourneyNode);
+	}
+	
 	
 	public ZoneTravelMaster getFarthestTravelZoneDuringWeek()
 	{

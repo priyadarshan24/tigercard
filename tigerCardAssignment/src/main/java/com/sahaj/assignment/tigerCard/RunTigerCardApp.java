@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.sahaj.assignment.tigerCard.pojos.FromZoneToZone;
@@ -20,6 +18,7 @@ import com.sahaj.assignment.tigerCard.visitables.IJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.OverallJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.SingleJourneyNode;
 import com.sahaj.assignment.tigerCard.visitables.WeekJourneyNode;
+import com.sahaj.assignment.tigerCard.visitors.FareCalculatorVisitor;
 
 public class RunTigerCardApp {
 
@@ -55,17 +54,15 @@ public class RunTigerCardApp {
 		System.out.println(inputFileFolder);
 		
 		RunTigerCardApp runTigerCardApp = new RunTigerCardApp();
-		//runTigerCardApp.readPeakHourTimings(inputFileFolder, "peakHourMaster.txt");
-		//runTigerCardApp.readZoneFareMasterData(inputFileFolder, "zoneFareMaster.txt");
+		runTigerCardApp.readPeakHourTimings(inputFileFolder, "peakHourMaster.txt");
+		runTigerCardApp.readZoneFareMasterData(inputFileFolder, "zoneFareMaster.txt");
 		
 		IJourneyNode iJourneyNode = runTigerCardApp.readInputJourney(inputFileFolder, "inputjourneys.txt");
 		
-		Object instance1 = PeakHourTimingsMasterManager.INSTANCE;
-		Object instance2 = ZoneTravelMasterManager.INSTANCE;
+		double totalJourneyFare = iJourneyNode.accept(new FareCalculatorVisitor());
+		System.out.println("Printing journeyFare::" + totalJourneyFare);
 		
-		System.out.println("Print peakHour:" + PeakHourTimingsMasterManager.INSTANCE);
-		System.out.println("Print zoneFareMaster:" + ZoneTravelMasterManager.INSTANCE);
-		
+	
 	}
 	
 	
@@ -199,6 +196,7 @@ public class RunTigerCardApp {
 		Map<String, DayJourneyNode> dayJourneyNodeMap = new HashMap<String, DayJourneyNode>();
 		Map<Integer,WeekJourneyNode> weekJourneyNodeMap = new HashMap<Integer, WeekJourneyNode>();
 		int weekCounter = 0;
+		String lastJourneyDay = null;
 		
 		OverallJourneyNode overallJourneyNode = new OverallJourneyNode();
 		
@@ -222,7 +220,7 @@ public class RunTigerCardApp {
 				
 				String fromZone= null, toZone= null, journeyDay= null, journeyTime = null;
 				
-				String lastJourneyDay = null;
+				
 				
 				for(int index = 0; index <inputJourneyData.length; index++)
 				{	
@@ -239,6 +237,11 @@ public class RunTigerCardApp {
 				SingleJourneyNode singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().
 																fromZoneToZone(fromZoneToZone).travelTime(travelTime).build();
 				
+				if(lastJourneyDay != null && !lastJourneyDay.equals("Monday") && journeyDay.equals("Monday") )
+				{
+					weekCounter++;
+				}
+				
 				String dayJourneyNodeMapKey = journeyDay + weekCounter;
 				DayJourneyNode dayJourneyNode =null;
 				if( (dayJourneyNode = dayJourneyNodeMap.get(dayJourneyNodeMapKey)) == null)
@@ -249,10 +252,7 @@ public class RunTigerCardApp {
 				
 				dayJourneyNode.addSingleJourneyNode(singleJourneyNode);
 				
-				if(lastJourneyDay != null && !lastJourneyDay.equals("Monday") && journeyDay.equals("Monday") )
-				{
-					weekCounter++;
-				}
+				
 				
 				WeekJourneyNode weekJourneyNode = null;
 				if((weekJourneyNode = weekJourneyNodeMap.get(weekCounter)) == null)
@@ -263,7 +263,10 @@ public class RunTigerCardApp {
 					
 				}
 				
-				weekJourneyNode.addDayJourneyNode(dayJourneyNode);
+				if( !weekJourneyNode.contains(dayJourneyNode))
+				{
+					weekJourneyNode.addDayJourneyNode(dayJourneyNode);
+				}
 				
 				lastJourneyDay = journeyDay;
 				
