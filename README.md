@@ -23,7 +23,7 @@ Visitor Design Pattern has been used to design the system. Fare Processing logic
 A visitor then travels all the nodes in the tree starting with the leaf node and iterates all the way up to the parent node calculating fares, rolling them up, applying fare caps at each level. This design enables swapping in new Algorithms for fare processing logic without need to update any part of the system
 
 
-#How to Run the Application
+# How to Run the Application
 1) All the input files are in tigerCardAssignment/input Folder
 2) Masters can be configured in peakHourMaster.txt & zoneFareMaster.txt
 3) Input journeys can be configured in inputjourneys.txt
