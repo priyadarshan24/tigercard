@@ -10,3 +10,4 @@ Tuesday,16:15,1,1
 Tuesday,18:15,1,1
 Tuesday,19:00,1,2
 Monday,19:00,1,2
+Monday,19:00,1,2
