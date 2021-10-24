@@ -12,32 +12,40 @@ public enum TigerCardUtil {
 		
 		int timeInSeconds = 0;
 		
-		if( inputTime ==null || inputTime.trim().isBlank())
+		validateInputTime(inputTime);
+		
+		
+		String[] splitTime = inputTime.split(SPLIT_TOKEN);
+		
+		validateSplitTime(splitTime);
+		
+		
+		for(int index = 0; index < splitTime.length; index++)
 		{
-			throw new IllegalArgumentException("Time Parameter cannot be empty");
+			
+			timeInSeconds += index == 0 ? Integer.parseInt(splitTime[0])*3600 : Integer.parseInt(splitTime[1])*60;
+			
 		}
-		
-		
-			String[] splitTime = inputTime.split(SPLIT_TOKEN);
-			
-			if( splitTime == null || splitTime.length <= 0)
-			{
-				throw new IllegalArgumentException("Input time format is not supported");
-			}
-			
-			
-			
-			for(int index = 0; index < splitTime.length; index++)
-			{
-				
-				timeInSeconds += index == 0 ? Integer.parseInt(splitTime[0])*3600 : Integer.parseInt(splitTime[1])*60;
-				
-			}
 		
 		
 		return timeInSeconds;
 		
-		
+	}
+
+	private void validateSplitTime(String[] splitTime) 
+	{
+		if( splitTime == null || splitTime.length <= 0)
+		{
+			throw new IllegalArgumentException("Input time format is not supported");
+		}
+	}
+
+	private void validateInputTime(String inputTime) 
+	{
+		if( inputTime ==null || inputTime.trim().isBlank())
+		{
+			throw new IllegalArgumentException("Time Parameter cannot be empty");
+		}
 	}
 
 }

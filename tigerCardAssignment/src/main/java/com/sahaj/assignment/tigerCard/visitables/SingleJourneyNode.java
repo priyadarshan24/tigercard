@@ -33,17 +33,22 @@ public class SingleJourneyNode extends JourneyNode{
 		return explanation;
 	}
 
-
+	//Encapsulation of Field
 	public void setExplanation(String explanation) {
-		this.explanation = explanation;
+		if( explanation != null && !explanation.isBlank() )
+		{
+			this.explanation = explanation;
+		}
 	}
 	
+	//hide the delegate pattern
 	public String getJourneyDay()
 	{
 		return this.travelTime.getDay();
 	}
 
-
+	
+	//Builder Design pattern to handle telescopic constructor problem
 	public static class SingleJourneyNodeBuilder 
 	{
 		private FromZoneToZone fromZoneToZone;

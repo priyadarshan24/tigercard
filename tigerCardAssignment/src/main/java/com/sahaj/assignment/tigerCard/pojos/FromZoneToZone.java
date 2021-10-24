@@ -1,5 +1,6 @@
 package com.sahaj.assignment.tigerCard.pojos;
 
+//Replace Record with Data Class
 public class FromZoneToZone {
 
 	private String fromZone;
@@ -12,6 +13,15 @@ public class FromZoneToZone {
 		this.toZone = toZone;
 		
 	}
+	
+	public String getFromZone() {
+		return fromZone;
+	}
+
+	public String getToZone() {
+		return toZone;
+	}
+	
 
 	@Override 
 	public boolean equals(Object sourceObjToCompare) 
@@ -41,7 +51,7 @@ public class FromZoneToZone {
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
+
 		return this.toString().length();
 	}
 	
@@ -55,12 +65,6 @@ public class FromZoneToZone {
 		return fromZoneToZoneBuilder.toString();
 	}
 
-	public String getFromZone() {
-		return fromZone;
-	}
-
-	public String getToZone() {
-		return toZone;
-	}
+	
 
 }

@@ -2,10 +2,6 @@ package com.sahaj.assignment.tigerCard.pojos;
 
 public class ZoneTravelMaster {
 	
-	public FromZoneToZone getFromZoneToZone() {
-		return fromZoneToZone;
-	}
-
 
 	private FromZoneToZone fromZoneToZone;
 	
@@ -16,7 +12,9 @@ public class ZoneTravelMaster {
 	private double dailyCapFare;
 	private double weeklyCapFare;
 	
-
+	public FromZoneToZone getFromZoneToZone() {
+		return fromZoneToZone;
+	}
 
 	public double getPeakHourFare() {
 		return peakHourFare;
@@ -97,14 +95,12 @@ public class ZoneTravelMaster {
 		
 		
 		public ZoneTravelMaster build() {
-            ZoneTravelMaster zoneTravelMaster =  new ZoneTravelMaster(this);
-            //validateUserObject(user);
-            return zoneTravelMaster;
+			return  new ZoneTravelMaster(this);
+           
         }
 		
 	
 	}
-	
 	
 
 }
