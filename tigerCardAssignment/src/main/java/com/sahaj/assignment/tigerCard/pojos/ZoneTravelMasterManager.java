@@ -14,12 +14,12 @@ public enum ZoneTravelMasterManager
 	INSTANCE;
 	
 	//fromZone,toZone,peakHourFare,offPeakHourFare,dailyCap,weeklyCap
-	public static final int ZONE_MASTER_FROM_ZONE_INDEX = 0;
-	public static final int ZONE_MASTER_TO_ZONE_INDEX = 1;
-	public static final int ZONE_MASTER_PEAK_HOUR_FARE_INDEX = 2;
-	public static final int ZONE_MASTER_OFF_PEAK_HOUR_INDEX = 3;
-	public static final int ZONE_MASTER_DAILY_CAP_INDEX = 4;
-	public static final int ZONE_MASTER_WEEKLY_CAP_INDEX = 5;
+	private static final int ZONE_MASTER_FROM_ZONE_INDEX = 0;
+	private static final int ZONE_MASTER_TO_ZONE_INDEX = 1;
+	private static final int ZONE_MASTER_PEAK_HOUR_FARE_INDEX = 2;
+	private static final int ZONE_MASTER_OFF_PEAK_HOUR_INDEX = 3;
+	private static final int ZONE_MASTER_DAILY_CAP_INDEX = 4;
+	private static final int ZONE_MASTER_WEEKLY_CAP_INDEX = 5;
 	
 	private Map<FromZoneToZone, ZoneTravelMaster> zoneTravelMasterData = new HashMap<FromZoneToZone, ZoneTravelMaster>();
 	
@@ -80,7 +80,6 @@ public enum ZoneTravelMasterManager
 				
 				
 			}
-			
 			
 			
 		} catch (IOException e) {

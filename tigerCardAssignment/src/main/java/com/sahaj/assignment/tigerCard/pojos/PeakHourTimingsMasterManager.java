@@ -13,14 +13,13 @@ public enum PeakHourTimingsMasterManager {
 	
 	INSTANCE;
 	
-	public static final int PEAK_HOUR_TIMING_DAY_CATEGORY_INDEX = 0;
-	public static final int PEAK_HOUR_TIMING_START_TIME_INDEX = 1;
-	public static final int PEAK_HOUR_TIMING_END_TIME_INDEX = 2;
+	private static final int PEAK_HOUR_TIMING_DAY_CATEGORY_INDEX = 0;
+	private static final int PEAK_HOUR_TIMING_START_TIME_INDEX = 1;
+	private static final int PEAK_HOUR_TIMING_END_TIME_INDEX = 2;
 	
 	
-	
-	List<PeakHourTimings> weekDayPeakHourTimings = new ArrayList<PeakHourTimings>();
-	List<PeakHourTimings> weekendPeakHourTimings = new ArrayList<PeakHourTimings>();
+	private List<PeakHourTimings> weekDayPeakHourTimings = new ArrayList<PeakHourTimings>();
+	private List<PeakHourTimings> weekendPeakHourTimings = new ArrayList<PeakHourTimings>();
 	
 	
 	public void addWeekDayPeakHourTimings(PeakHourTimings peakHourTiming)
@@ -76,7 +75,7 @@ public enum PeakHourTimingsMasterManager {
 			
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} 
 	}
