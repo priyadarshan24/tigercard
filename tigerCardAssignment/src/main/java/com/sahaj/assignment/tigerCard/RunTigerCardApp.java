@@ -82,31 +82,12 @@ public class RunTigerCardApp {
 				
 				String[] inputJourneyData = currentLineRead.split(",");
 				
-				if( inputJourneyData.length < 4)
-				{
-					throw new IllegalArgumentException("Wrong Input format type for Input Journey");
-				}
+				validateInput(inputJourneyData);
 				
-				String fromZone= null, toZone= null, journeyDay= null, journeyTime = null;
+				SingleJourneyNode singleJourneyNode = createSingleJourneyNode(inputJourneyData);
+				String journeyDay = singleJourneyNode.getJourneyDay();
 				
-				
-				
-				for(int index = 0; index <inputJourneyData.length; index++)
-				{	
-					fromZone = index == INPUT_JOURNEY_FROMZONE_INDEX ? inputJourneyData[INPUT_JOURNEY_FROMZONE_INDEX] : fromZone;
-					toZone = index == INPUT_JOURNEY_TOZONE_INDEX ? inputJourneyData[INPUT_JOURNEY_TOZONE_INDEX] :toZone;
-					journeyDay = index == INPUT_JOURNEY_DAY_INDEX ? inputJourneyData[INPUT_JOURNEY_DAY_INDEX] : journeyDay;
-					journeyTime = index == INPUT_JOURNEY_TIME_INDEX ? inputJourneyData[INPUT_JOURNEY_TIME_INDEX] : journeyTime;
-				
-				}
-				
-				
-				FromZoneToZone fromZoneToZone = new FromZoneToZone(fromZone, toZone);
-				TravelTime travelTime = new TravelTime(journeyDay, journeyTime);
-				SingleJourneyNode singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().
-																fromZoneToZone(fromZoneToZone).travelTime(travelTime).build();
-				
-				if(lastJourneyDay != null && !lastJourneyDay.equals("Monday") && journeyDay.equals("Monday") )
+				if(isNewWeek(lastJourneyDay, journeyDay) )
 				{
 					weekCounter++;
 				}
@@ -149,6 +130,42 @@ public class RunTigerCardApp {
 		} 
 		
 		return overallJourneyNode;
+	}
+
+
+	private boolean isNewWeek(String lastJourneyDay, String journeyDay) {
+		return lastJourneyDay != null && !lastJourneyDay.equals("Monday") && journeyDay.equals("Monday");
+	}
+
+
+	private void validateInput(String[] inputJourneyData) {
+		if( inputJourneyData.length < 4)
+		{
+			throw new IllegalArgumentException("Wrong Input format type for Input Journey");
+		}
+	}
+	
+	private SingleJourneyNode createSingleJourneyNode(String[] inputJourneyData)
+	{
+		String fromZone= null, toZone= null, journeyDay= null, journeyTime = null;
+		
+		
+		for(int index = 0; index <inputJourneyData.length; index++)
+		{	
+			fromZone = index == INPUT_JOURNEY_FROMZONE_INDEX ? inputJourneyData[INPUT_JOURNEY_FROMZONE_INDEX] : fromZone;
+			toZone = index == INPUT_JOURNEY_TOZONE_INDEX ? inputJourneyData[INPUT_JOURNEY_TOZONE_INDEX] :toZone;
+			journeyDay = index == INPUT_JOURNEY_DAY_INDEX ? inputJourneyData[INPUT_JOURNEY_DAY_INDEX] : journeyDay;
+			journeyTime = index == INPUT_JOURNEY_TIME_INDEX ? inputJourneyData[INPUT_JOURNEY_TIME_INDEX] : journeyTime;
+		
+		}
+		
+		
+		FromZoneToZone fromZoneToZone = new FromZoneToZone(fromZone, toZone);
+		TravelTime travelTime = new TravelTime(journeyDay, journeyTime);
+		SingleJourneyNode singleJourneyNode = new SingleJourneyNode.SingleJourneyNodeBuilder().
+														fromZoneToZone(fromZoneToZone).travelTime(travelTime).build();
+		
+		return singleJourneyNode;
 	}
 	
 	

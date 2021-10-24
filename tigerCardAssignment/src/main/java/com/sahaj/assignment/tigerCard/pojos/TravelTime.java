@@ -21,6 +21,11 @@ public class TravelTime {
 	}
 	
 	
+	public String getDay() {
+		return day;
+	}
+
+
 	public boolean isPeakHourTravelTime()
 	{
 		return isPeakHourWeekend() || isPeakHourWeekday() ? true : false;

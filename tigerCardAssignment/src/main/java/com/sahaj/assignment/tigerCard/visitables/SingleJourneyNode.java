@@ -59,6 +59,11 @@ public class SingleJourneyNode implements IJourneyNode{
 	public void setExplanation(String explanation) {
 		this.explanation = explanation;
 	}
+	
+	public String getJourneyDay()
+	{
+		return this.travelTime.getDay();
+	}
 
 
 	public static class SingleJourneyNodeBuilder 
