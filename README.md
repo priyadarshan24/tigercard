@@ -12,6 +12,7 @@
 9) Exception Handking Framework has not been focussed on. Simple "throws" and "printStackTrace" feature have been used. A more sophisticated mechanism can be implemented custom defined exceptions and a single Exception handler for all exceptions
 10) File Based Inputs are provided to run the program with inputs and Master Data
 11) Junit Test cases have not been written on File Input processing. They have been written only on core Business logic areas of code and important core business logic classes
+12) FileReader class could have been abstracted out behind an interface to allow multiple journey input strategies. But have deferred the implementaion since assignment mentioned not to focus too much on IO. For now its a simple Reader implementation
 
 # Solution
 Visitor Design Pattern has been used to design the system. Fare Processing logic is decoupled from the Data structure design around journeys. The single journey data have been organized as a tree structure as Follows:
