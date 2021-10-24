@@ -20,27 +20,28 @@ public enum FileInputReader implements IInputReader {
 	INSTANCE;
 	
 	//#Inputformat >> day,time,fromZone,toZone
-		public static final int INPUT_JOURNEY_DAY_INDEX = 0;
-		public static final int INPUT_JOURNEY_TIME_INDEX = 1;
-		public static final int INPUT_JOURNEY_FROMZONE_INDEX = 2;
-		public static final int INPUT_JOURNEY_TOZONE_INDEX = 3;
-
+	public static final int INPUT_JOURNEY_DAY_INDEX = 0;
+	public static final int INPUT_JOURNEY_TIME_INDEX = 1;
+	public static final int INPUT_JOURNEY_FROMZONE_INDEX = 2;
+	public static final int INPUT_JOURNEY_TOZONE_INDEX = 3;
+		
+	private OverallJourneyNode overallJourneyNode = new OverallJourneyNode();
+	private Map<String, DayJourneyNode> dayJourneyNodeMap = new HashMap<String, DayJourneyNode>();
+	private Map<Integer,WeekJourneyNode> weekJourneyNodeMap = new HashMap<Integer, WeekJourneyNode>();
+		
 	@Override
 	public JourneyNode readInput(String inputFileFolder, String fileName) 
 	{
-		
-
 		
 		File inputJourneyFile = new File(inputFileFolder, fileName);
 		int lineCount = 0;
 		String currentLineRead = null;
 		
-		Map<String, DayJourneyNode> dayJourneyNodeMap = new HashMap<String, DayJourneyNode>();
-		Map<Integer,WeekJourneyNode> weekJourneyNodeMap = new HashMap<Integer, WeekJourneyNode>();
+		
 		int weekCounter = 0;
 		String lastJourneyDay = null;
 		
-		OverallJourneyNode overallJourneyNode = new OverallJourneyNode();
+		
 		
 		try (BufferedReader bufferedFileReader = new BufferedReader(new FileReader(inputJourneyFile)) ){
 			
@@ -58,40 +59,17 @@ public enum FileInputReader implements IInputReader {
 				validateInput(inputJourneyData);
 				
 				SingleJourneyNode singleJourneyNode = createSingleJourneyNode(inputJourneyData);
-				String journeyDay = singleJourneyNode.getJourneyDay();
 				
-				if(isNewWeek(lastJourneyDay, journeyDay) )
+				if(isNewWeek(lastJourneyDay, singleJourneyNode.getJourneyDay()) )
 				{
 					weekCounter++;
 				}
 				
-				String dayJourneyNodeMapKey = journeyDay + weekCounter;
-				DayJourneyNode dayJourneyNode =null;
-				if( (dayJourneyNode = dayJourneyNodeMap.get(dayJourneyNodeMapKey)) == null)
-				{
-					dayJourneyNode = new DayJourneyNode(journeyDay);
-					dayJourneyNodeMap.put(dayJourneyNodeMapKey, dayJourneyNode);
-				}
+				DayJourneyNode dayJourneyNode =createDayJourneyNode(singleJourneyNode, weekCounter);
 				
-				dayJourneyNode.addSingleJourneyNode(singleJourneyNode);
+				createWeekJourneyNode(dayJourneyNode, weekCounter);
 				
-				
-				
-				WeekJourneyNode weekJourneyNode = null;
-				if((weekJourneyNode = weekJourneyNodeMap.get(weekCounter)) == null)
-				{
-					weekJourneyNode= new WeekJourneyNode();
-					weekJourneyNodeMap.put(weekCounter, weekJourneyNode);
-					overallJourneyNode.addWeekJourneyNode(weekJourneyNode);
-					
-				}
-				
-				if( !weekJourneyNode.contains(dayJourneyNode))
-				{
-					weekJourneyNode.addDayJourneyNode(dayJourneyNode);
-				}
-				
-				lastJourneyDay = journeyDay;
+				lastJourneyDay = singleJourneyNode.getJourneyDay();
 				
 			}
 			
@@ -107,17 +85,41 @@ public enum FileInputReader implements IInputReader {
 		
 	}
 	
-	private boolean isNewWeek(String lastJourneyDay, String journeyDay) {
-		return lastJourneyDay != null && !lastJourneyDay.equals("Monday") && journeyDay.equals("Monday");
-	}
-
-
-	private void validateInput(String[] inputJourneyData) {
-		if( inputJourneyData.length < 4)
+	private DayJourneyNode createDayJourneyNode(SingleJourneyNode singleJourneyNode, int weekCounter)
+	{
+		String dayJourneyNodeMapKey = singleJourneyNode.getJourneyDay() + weekCounter;
+		DayJourneyNode dayJourneyNode =null;
+		if( (dayJourneyNode = dayJourneyNodeMap.get(dayJourneyNodeMapKey)) == null)
 		{
-			throw new IllegalArgumentException("Wrong Input format type for Input Journey");
+			dayJourneyNode = new DayJourneyNode(singleJourneyNode.getJourneyDay());
+			dayJourneyNodeMap.put(dayJourneyNodeMapKey, dayJourneyNode);
 		}
+		
+		dayJourneyNode.addSingleJourneyNode(singleJourneyNode);
+		
+		return dayJourneyNode;
 	}
+	
+	private WeekJourneyNode createWeekJourneyNode(DayJourneyNode dayJourneyNode, int weekCounter )
+	{
+		WeekJourneyNode weekJourneyNode = null;
+		if((weekJourneyNode = weekJourneyNodeMap.get(weekCounter)) == null)
+		{
+			weekJourneyNode= new WeekJourneyNode();
+			weekJourneyNodeMap.put(weekCounter, weekJourneyNode);
+			overallJourneyNode.addWeekJourneyNode(weekJourneyNode);
+			
+		}
+		
+		if( !weekJourneyNode.contains(dayJourneyNode))
+		{
+			weekJourneyNode.addDayJourneyNode(dayJourneyNode);
+		}
+		
+		return weekJourneyNode;
+		
+	}
+	
 	
 	private SingleJourneyNode createSingleJourneyNode(String[] inputJourneyData)
 	{
@@ -140,6 +142,19 @@ public enum FileInputReader implements IInputReader {
 														fromZoneToZone(fromZoneToZone).travelTime(travelTime).build();
 		
 		return singleJourneyNode;
+	}
+	
+	
+	private boolean isNewWeek(String lastJourneyDay, String journeyDay) {
+		return lastJourneyDay != null && !lastJourneyDay.equals("Monday") && journeyDay.equals("Monday");
+	}
+
+
+	private void validateInput(String[] inputJourneyData) {
+		if( inputJourneyData.length < 4)
+		{
+			throw new IllegalArgumentException("Wrong Input format type for Input Journey");
+		}
 	}
 
 }
