@@ -8,9 +8,6 @@ import com.sahaj.assignment.tigerCard.visitors.FareCalculatorVisitor;
 
 public class RunTigerCardApp {
 
-
-	
-	
 	public static final String INPUT_FOLDER_NAME = "input";
 	public static final String PEAK_HOUR_TIMING_MASTER_FILE_NAME = "peakHourMaster.txt";
 	public static final String ZONE_FARE_MASTER_FILE_NAME = "zoneFareMaster.txt";
