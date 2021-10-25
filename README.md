@@ -17,6 +17,7 @@
 # Solution
 Visitor Design Pattern has been used to design the system. Fare Processing logic is decoupled from the Data structure design around journeys. The single journey data have been organized as a tree structure as Follows:
 
+![image](https://user-images.githubusercontent.com/6222967/138647346-5c63a2ea-8dc7-41b4-8c88-5ca4820eeecf.png)
 
 ![image](https://user-images.githubusercontent.com/6222967/138601489-9d04ddf8-3c35-4a36-8a6a-ea84951169a0.png)
 
