@@ -7,9 +7,9 @@
 4) Daily Fare Cap is used as basis to calculate the Farthest Zone in a journey
 5) Seperate Master Data line item for reverse journey is not maintained, cost of Zone 1-2 and Zone 2-1 is assumed to be same. Seperate cost master for reverse journey is not maintained
 6) Weekdays are assumed to be from Monday to Friday and Weekend - Saturday & Sunday are assumed. Peak Hour timings are assumed to exist in only 2 categories > Weekend and Weekdays
-7) If two interzone travels have the same DailyCapFare, its assumed that Weekly Fare Cap, Off Peak Hours Cost and Peak Hours cost are same
-8) Reusability of code has not been considered for JUnit Test Cases. There is redundancy in data initilization code - prefer copy paste over building functions
-9) Exception Handking Framework has not been focussed on. Simple "throws" and "printStackTrace" feature have been used. A more sophisticated mechanism can be implemented custom defined exceptions and a single Exception handler for all exceptions
+7) If two interzone travels have the same DailyCapFare, its assumed that Weekly Fare Cap, Off Peak Hours Cost and Peak Hours cost are also proportionally greater than their peers 
+8) Reusability of code has not been considered for JUnit Test Cases. There is redundancy in data initilization code - preferred copy paste over building functions
+9) Exception Handling Framework has not been focussed on. Simple "throws" and "printStackTrace" feature have been used. A more sophisticated mechanism can be implemented with custom defined exceptions and a single Exception handler for all exceptions
 10) File Based Inputs are provided to run the program with inputs and Master Data
 11) Junit Test cases have not been written on File Input processing. They have been written only on core Business logic areas of code and important core business logic classes
 12) FileReader class could have been abstracted out behind an interface to allow multiple journey input strategies. But have deferred the implementaion since assignment mentioned not to focus too much on IO. For now its a simple Reader implementation
@@ -29,5 +29,5 @@ A visitor then travels all the nodes in the tree starting with the leaf node and
 2) Masters can be configured in peakHourMaster.txt & zoneFareMaster.txt
 3) Input journeys can be configured in inputjourneys.txt
 4) Pls note that first line of all files is considered as Header explaining the input format
-5) Run the RunTigerCardAppTest Test Class which help you Run the app and validate your output against the input journeys in inputjourneys.txt
+5) Run the RunTigerCardAppTest Junit Test Class which will help you Run the app and validate your output against the input journeys in inputjourneys.txt. Update the test class to reflect the expected output
 6) Alternately you can also Run RunTigerCardApp class or Maven Run
